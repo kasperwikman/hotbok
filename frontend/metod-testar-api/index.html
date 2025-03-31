@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Rooms</title>
+</head>
+<body>
+    <h1 class="rooms"></h1>
+    <script>
+        // Define an async function to fetch and display rooms
+        async function fetchRooms() {
+            
+                const response = await fetch('https://<your-server>:8523/rooms');
+                const data = await response.json();
+                const roomList = document.getElementById('room-list');
+                
+                data.rooms.forEach(room => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Room ${room.room_number} - ${room.type} - $${room.price}`;
+                    roomList.appendChild(listItem);
+                });
+            
+        }
+
+        fetchRooms();
+    </script>
+</body>
+</html>
