@@ -1,5 +1,14 @@
-GET http://vm4430.kaj.pouta.csc.fi:8523/rooms
+@apiUrl = http://vm4430.kaj.pouta.csc.fi:8523/
+
+
+GET {{apiUrl}}/rooms
 
 ###
 
-GET http://vm4430.kaj.pouta.csc.fi:8523/rooms/0
+GET {{apiUrl}}/rooms/0
+
+###
+
+POST GET {{apiUrl}}/bookings
+Content-Type: application/json
+
