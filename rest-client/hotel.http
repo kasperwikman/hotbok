@@ -1,7 +1,7 @@
 @apiUrl = http://0.0.0.0:8523
 
 
-GET {{apiUrl}}/rooms
+GET {{apiUrl}}/temp
 
 ###
 
