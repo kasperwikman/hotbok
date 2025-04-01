@@ -1,4 +1,4 @@
-@apiUrl = http://vm4430.kaj.pouta.csc.fi:8523/
+@apiUrl = http://0.0.0.0:8523
 
 
 GET {{apiUrl}}/rooms
