@@ -11,7 +11,7 @@
     <script>
         async function fetchRooms() {
             
-                const response = await fetch('https://vm4430.kaj.pouta.csc.fi:8523/rooms');
+                const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/rooms');
                 const data = await response.json();
                 const roomList = document.getElementById('room-list');
                 
