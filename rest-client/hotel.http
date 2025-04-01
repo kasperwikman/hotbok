@@ -1,0 +1,5 @@
+GET http://vm4430.kaj.pouta.csc.fi:8523/rooms
+
+###
+
+GET http://vm4430.kaj.pouta.csc.fi:8523/rooms/0
