@@ -33,16 +33,12 @@ def temp():
         return messages
 
 
-
-rooms = [
-        {"room_number": 101, "type": "Single", "price": 100},
-        {"room_number": 102, "type": "Double", "price": 150},
-        {"room_number": 103, "type": "Suite", "price": 250},
-    ]
-
 @app.get("/rooms")
 def get_rooms():
-    return rooms
+    with conn.cursor() as cur:
+        cur.execute("SELECT * FROM hotel_rooms")
+        rooms = cur.fetchall()
+        return rooms
 
 @app.get("/rooms/{id}")
 def get_one_room(id: int):
