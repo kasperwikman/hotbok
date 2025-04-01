@@ -5,7 +5,7 @@ GET {{apiUrl}}/temp
 
 ###
 
-GET {{apiUrl}}/rooms/0
+GET {{apiUrl}}/rooms/
 
 ###
 
