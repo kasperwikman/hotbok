@@ -27,7 +27,10 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 
 @app.get("/temp")
 def temp():
-    return {"message": "Hello World"}
+    with conn.cursor() as cur:
+        cur.execute("SELECT * FROM messages")
+        messages = cur.fetchall()
+        return messages
 
 
 
