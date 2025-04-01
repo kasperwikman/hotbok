@@ -9,6 +9,12 @@ GET {{apiUrl}}/rooms/0
 
 ###
 
-POST GET {{apiUrl}}/bookings
+POST {{apiUrl}}/bookings
 Content-Type: application/json
+
+{
+    "guest": 1,
+    "room": 0,
+}
+
 
