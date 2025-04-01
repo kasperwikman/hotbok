@@ -10,6 +10,12 @@ PORT=8523
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
+@app.get("/temp")
+def temp():
+    return {"message": "Hello World"}
+
+
+
 rooms = [
         {"room_number": 101, "type": "Single", "price": 100},
         {"room_number": 102, "type": "Double", "price": 150},
