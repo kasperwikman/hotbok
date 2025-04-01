@@ -13,6 +13,7 @@
             
                 const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/rooms');
                 const data = await response.json();
+                console.log(data);
                 const roomList = document.getElementById('room-list');
                 
                 data.rooms.forEach(room => {
