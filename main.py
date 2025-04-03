@@ -26,6 +26,7 @@ class Booking(BaseModel):
     room_id: int
     datefrom: date
     dateto: date
+    addinfo: str
 
 @app.get("/temp")
 def temp():
@@ -56,11 +57,12 @@ def get_one_room(id: int):
 def create_booking(booking: Booking):
     with conn.cursor() as cur:
         cur.execute(
-            "INSERT INTO hotel_bookings (guest_id, room_id, datefrom, dateto) VALUES (%s, %s, %s, %s) RETURNING id",
+            "INSERT INTO hotel_bookings (guest_id, room_id, datefrom, dateto, addinfo) VALUES (%s, %s, %s, %s, %s) RETURNING id",
             [booking.guest_id, 
              booking.room_id, 
              booking.datefrom, 
-             booking.dateto],
+             booking.dateto,
+             booking.addinfo],
         )
         booking_id = cur.fetchone()['id']
     return {"message": "Booking created successfully", "booking_id": booking_id}
