@@ -52,6 +52,13 @@ def get_one_room(id: int):
             return room
         else:
             return {"error": "Room not found"}
+        
+@app.get("/bookings")
+def get_bookings():
+    with conn.cursor() as cur:
+        cur.execute("SELECT * FROM hotel_bookings ORDER BY datefrom")
+        bookings = cur.fetchall()
+        return bookings
     
 @app.post("/bookings")
 def create_booking(booking: Booking):
