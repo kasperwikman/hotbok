@@ -14,7 +14,7 @@ Content-Type: application/json
 
 {
     "guest": 1,
-    "room": 101,
+    "room": 2
 }
 
 

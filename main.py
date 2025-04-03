@@ -23,17 +23,6 @@ conn = psycopg.connect(
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
-@app.get("/if/{user_input}")
-def iftest (user_input: str):
-    message = None # None = null
-    if user_input == "hello":
-        message = "hello to you too"
-    elif user_input == "bye":
-        message = "bye bye"
-    else:
-        message = "I don't understand"
-    return {"message:": message}
-
 @app.get("/temp")
 def temp():
     with conn.cursor() as cur:
@@ -45,14 +34,14 @@ def temp():
 @app.get("/rooms")
 def get_rooms():
     with conn.cursor() as cur:
-        cur.execute("SELECT * FROM hotel_rooms")
+        cur.execute("SELECT * FROM hotel_rooms ORDER BY room_number")
         rooms = cur.fetchall()
         return rooms
 
 @app.get("/rooms/{id}")
 def get_one_room(id: int):
     with conn.cursor() as cur:
-        cur.execute("SELECT * FROM hotel_rooms WHERE id = %s", (id,))
+        cur.execute("SELECT * FROM hotel_rooms WHERE id = %s", [id])
         room = cur.fetchone()  # Fetch a single room
         if room:
             return room
@@ -63,6 +52,19 @@ def get_one_room(id: int):
 def create_booking(request: Request):
     return {"message": "Booking created successfully"}
 
+
+# if statement in python
+
+@app.get("/if/{user_input}")
+def iftest (user_input: str):
+    message = None # None = null
+    if user_input == "hello" or user_input == "hi":
+        message = user_input + " to you too"
+    elif user_input == "bye":
+        message = "bye bye"
+    else:
+        message = f"I don't understand {user_input}"
+    return {"message:": message}
 
 
 
