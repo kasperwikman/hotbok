@@ -42,14 +42,22 @@ def get_rooms():
 
 @app.get("/rooms/{id}")
 def get_one_room(id: int):
-    try:
-        return rooms[id]
-    except:
-        return {"error": "Room not found"}
+    with conn.cursor() as cur:
+        cur.execute("SELECT * FROM hotel_rooms WHERE id = %s", (id,))
+        room = cur.fetchone()  # Fetch a single room
+        if room:
+            return room
+        else:
+            return {"error": "Room not found"}
     
 @app.post("/bookings")
 def create_booking(request: Request):
     return {"message": "Booking created successfully"}
+
+
+
+
+#_____________________________________uvicorn config____________________________________________
 
 if __name__ == "__main__":
     uvicorn.run(
