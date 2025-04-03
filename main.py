@@ -57,10 +57,11 @@ def get_one_room(id: int):
 def create_booking(booking: Booking):
     with conn.cursor() as cur:
         cur.execute(
-            "INSERT INTO hotel_bookings (guest_id, room_id) VALUES (%s, %s)",
+            "INSERT INTO hotel_bookings (guest_id, room_id) VALUES (%s, %s) RETURNING id",
             [booking.guest_id, booking.room_id]
         )
-    return {"message": "Booking created successfully"}
+        booking_id = cur.fetchone()['id']
+    return {"message": "Booking created successfully", "booking_id": booking_id}
 
 
 # if statement in python
