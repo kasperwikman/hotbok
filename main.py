@@ -23,7 +23,16 @@ conn = psycopg.connect(
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 
-
+@app.get("/if/{user_input}")
+def iftest (user_input: str):
+    message = None # None = null
+    if user_input == "hello":
+        message = "hello to you too"
+    elif user_input == "bye":
+        message = "bye bye"
+    else:
+        message = "I don't understand"
+    return {"message:": message}
 
 @app.get("/temp")
 def temp():
