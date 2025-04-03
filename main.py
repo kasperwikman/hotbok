@@ -56,7 +56,7 @@ def get_one_room(id: int):
 def create_booking(booking: Booking):
     with conn.cursor() as cur:
         cur.execute(
-            "INSERT INTO hotel_bookings (guest_id, room_id, datefrom, dateto) VALUES (%s, %s. %s, %s) RETURNING id",
+            "INSERT INTO hotel_bookings (guest_id, room_id, datefrom, dateto) VALUES (%s, %s, %s, %s) RETURNING id",
             [booking.guest_id, 
              booking.room_id, 
              booking.datefrom, 
