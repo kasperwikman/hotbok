@@ -4,16 +4,13 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from datetime import date
 
 PORT=8523
 
 # load environment variables from .env file
 load_dotenv()
 DB_URL = os.getenv("DB_URL")
-
-print(DB_URL)
-
-# Connect to the database
 
 conn = psycopg.connect(
     DB_URL,
@@ -27,6 +24,8 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, 
 class Booking(BaseModel):
     guest_id: int
     room_id: int
+    datefrom: date
+    dateto: date
 
 @app.get("/temp")
 def temp():
@@ -57,8 +56,11 @@ def get_one_room(id: int):
 def create_booking(booking: Booking):
     with conn.cursor() as cur:
         cur.execute(
-            "INSERT INTO hotel_bookings (guest_id, room_id) VALUES (%s, %s) RETURNING id",
-            [booking.guest_id, booking.room_id]
+            "INSERT INTO hotel_bookings (guest_id, room_id, datefrom, dateto) VALUES (%s, %s. %s, %s) RETURNING id",
+            [booking.guest_id, 
+             booking.room_id, 
+             booking.datefrom, 
+             booking.dateto],
         )
         booking_id = cur.fetchone()['id']
     return {"message": "Booking created successfully", "booking_id": booking_id}
