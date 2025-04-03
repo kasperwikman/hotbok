@@ -3,6 +3,7 @@ from psycopg.rows import dict_row
 from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
 PORT=8523
 
@@ -22,6 +23,10 @@ conn = psycopg.connect(
 
 app = FastAPI()
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+
+class Booking(BaseModel):
+    guest_id: int
+    room_id: int
 
 @app.get("/temp")
 def temp():
@@ -49,7 +54,12 @@ def get_one_room(id: int):
             return {"error": "Room not found"}
     
 @app.post("/bookings")
-def create_booking(request: Request):
+def create_booking(booking: Booking):
+    with conn.cursor() as cur:
+        cur.execute(
+            "INSERT INTO hotel_bookings (guest_id, room_id) VALUES (%s, %s)",
+            [booking.guest_id, booking.room_id]
+        )
     return {"message": "Booking created successfully"}
 
 
