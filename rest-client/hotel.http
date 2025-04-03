@@ -14,7 +14,9 @@ Content-Type: application/json
 
 {
     "guest_id": 1,
-    "room_id": 2
+    "room_id": 2,
+    "datefrom": "2025-05-01",
+    "dateto": "2025-05-10"
 }
 
 
