@@ -64,7 +64,7 @@ def create_booking(booking: Booking):
     return {"message": "Booking created successfully", "booking_id": booking_id}
 
 
-# if statement in python
+# _________________if statement in python_____________________
 
 @app.get("/if/{user_input}")
 def iftest (user_input: str):
