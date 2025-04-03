@@ -10,23 +10,7 @@
 <body>
     <h2>Available Rooms</h2>
     <ul id="room-list"></ul>
-    <script>
-        async function fetchRooms() {
-            {
-                const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/rooms');
-                const data = await response.json();
-                const roomList = document.getElementById('room-list');
-                roomList.innerHTML = '';
-                data.forEach(room => {
-                    const listItem = document.createElement('li');
-                    listItem.textContent = `Room ${room.room_number} - ${room.type} - $${room.price}`;
-                    roomList.appendChild(listItem);
-                });
-            }
-        }
-
-        fetchRooms();
-    </script>
+    
     <h2>Book A Room</h2>
     <form id="booking-form">
         <label for="room-select">Select Room:</label>
@@ -46,8 +30,23 @@
 
     <h2>All Bookings</h2>
     <ul id="booking-list"></ul>
+    
     <script>
+        async function fetchRooms() {
+            {
+                const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/rooms');
+                const data = await response.json();
+                const roomList = document.getElementById('room-list');
+                roomList.innerHTML = '';
+                data.forEach(room => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Room ${room.room_number} - ${room.type} - $${room.price}`;
+                    roomList.appendChild(listItem);
+                });
+            }
+        }
 
+        fetchRooms();
     </script>
 </body>
 
