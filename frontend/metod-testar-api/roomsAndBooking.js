@@ -21,6 +21,7 @@ async function fetchRooms() {
 }
 
 async function submitBooking() {
+    const guestId = document.getElementById('guest-select').value;
     const roomId = document.getElementById('room-select').value;
     const dateFrom = document.getElementById('datefrom').value;
     const dateTo = document.getElementById('dateto').value;
@@ -32,7 +33,7 @@ async function submitBooking() {
     }
 
     const booking = {
-        guest_id: 1, // hardcoded guest_id atm
+        guest_id: parseInt(guestId),
         room_id: parseInt(roomId),
         datefrom: dateFrom,
         dateto: dateTo,
