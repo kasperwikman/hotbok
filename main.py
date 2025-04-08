@@ -54,6 +54,7 @@ def get_one_room(id: int):
             return {"error": "Room not found"}
 
 # BOOKINGS
+#get bookings
 
 @app.get("/bookings")
 def get_bookings():
@@ -61,19 +62,24 @@ def get_bookings():
         cur.execute("""
             SELECT 
                 hb.id AS booking_id,
+                hr.room_number,
+                hr.price,
                 hg.firstname || ' ' || hg.lastname AS guest_name,
-                hr.room_number AS room_number,
                 hb.datefrom,
                 hb.dateto,
                 hb.addinfo
             FROM hotel_bookings hb
-            INNER JOIN hotel_guests hg ON hb.guest_id = hg.id
-            INNER JOIN hotel_rooms hr ON hb.room_id = hr.id
+            INNER JOIN hotel_rooms hr 
+            ON hr.id = hb.room_id
+            INNER JOIN hotel_guests hg 
+            ON hg.id = hb.guest_id
             ORDER BY hb.datefrom
         """)
         bookings = cur.fetchall()
         return bookings
-    
+
+# create booking
+
 @app.post("/bookings")
 def create_booking(booking: Booking):
     with conn.cursor() as cur:
@@ -95,10 +101,16 @@ def get_guests():
     with conn.cursor() as cur:
         cur.execute("""
                     SELECT 
-                        id, 
-                        firstname, 
-                        lastname 
-                    FROM hotel_guests 
+                        hg.id, 
+                        hg.firstname, 
+                        hg.lastname,
+                        hg.address,
+                        (
+                            SELECT COUNT(*) 
+                            FROM hotel_bookings hb 
+                            WHERE hb.guest_id = hg.id
+                    ) AS booking_count
+                    FROM hotel_guests hg
                     ORDER BY firstname
                     """)
         guests = cur.fetchall()
