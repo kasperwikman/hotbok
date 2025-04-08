@@ -109,7 +109,7 @@ def get_guests():
                             SELECT COUNT(*) 
                             FROM hotel_bookings hb 
                             WHERE hb.guest_id = hg.id
-                    ) AS booking_count
+                    ) AS visits
                     FROM hotel_guests hg
                     ORDER BY firstname
                     """)
