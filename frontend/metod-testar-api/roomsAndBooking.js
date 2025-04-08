@@ -7,14 +7,14 @@ async function fetchRooms() {
     roomSelect.innerHTML = '';
 
     data.forEach(room => {
-        // Add room to the list
+        // rummen till listan
         const listItem = document.createElement('li');
         listItem.textContent = `Room ${room.room_number} - ${room.type} - $${room.price}`;
         roomList.appendChild(listItem);
 
-        // Add room to the dropdown
+        // dropdown meny
         const option = document.createElement('option');
-        option.value = room.id; // Assuming the room has an 'id' field
+        option.value = room.id;
         option.textContent = `Room ${room.room_number} - ${room.type}`;
         roomSelect.appendChild(option);
     });
