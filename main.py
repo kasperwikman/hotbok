@@ -52,7 +52,9 @@ def get_one_room(id: int):
             return room
         else:
             return {"error": "Room not found"}
-        
+
+# BOOKINGS
+
 @app.get("/bookings")
 def get_bookings():
     with conn.cursor() as cur:
@@ -86,6 +88,21 @@ def create_booking(booking: Booking):
         booking_id = cur.fetchone()['id']
     return {"message": "Booking created successfully", "booking_id": booking_id}
 
+# GUESTS
+
+@app.get("/guests")
+def get_guests():
+    with conn.cursor() as cur:
+        cur.execute("""
+                    SELECT 
+                        id, 
+                        firstname, 
+                        lastname 
+                    FROM hotel_guests 
+                    ORDER BY firstname
+                    """)
+        guests = cur.fetchall()
+        return guests
 
 # _________________if statement in python_____________________
 
