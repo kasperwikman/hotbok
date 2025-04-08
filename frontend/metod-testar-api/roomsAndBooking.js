@@ -69,5 +69,20 @@ async function fetchBookings() {
         bookingList.appendChild(listItem);
     });
 }
+async function fetchGuests() {
+        const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/guests');
+        const guests = await response.json();
+
+        const guestSelect = document.getElementById('guest-select');
+        guestSelect.innerHTML = '';
+
+        guests.forEach(guest => {
+            const option = document.createElement('option');
+            option.value = guest.id;
+            option.textContent = `${guest.firstname} ${guest.lastname}`;
+            guestSelect.appendChild(option);
+        });
+}
+fetchGuests();
 fetchBookings();
 fetchRooms();

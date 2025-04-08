@@ -13,18 +13,21 @@
     
     <h2>Book A Room</h2>
     <form id="booking-form">
+        <label for="guest-select">Select Guest:</label>
+        <select id="guest-select"></select><br><br>
+    
         <label for="room-select">Select Room:</label>
         <select id="room-select"></select><br><br>
-
+    
         <label for="datefrom">From:</label>
         <input type="date" id="datefrom" required><br><br>
-
+    
         <label for="dateto">To:</label>
         <input type="date" id="dateto" required><br><br>
-
+    
         <label for="addinfo">Additional Info:</label>
         <input type="text" id="addinfo"><br><br>
-
+    
         <input type="button" value="Submit Booking" onclick="submitBooking()">
     </form>
 
