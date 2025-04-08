@@ -65,7 +65,7 @@ async function fetchBookings() {
 
     data.forEach(booking => {
         const listItem = document.createElement('li');
-        listItem.textContent = `Booking ID: ${booking.id}, Room ID: ${booking.room_id}, From: ${booking.datefrom}, To: ${booking.dateto}, Info: ${booking.addinfo}`;
+        listItem.textContent = `Guest Name: ${booking.guest_name}, Room Number: ${booking.room_number}, From: ${booking.datefrom}, To: ${booking.dateto}, Info: ${booking.addinfo}`;
         bookingList.appendChild(listItem);
     });
 }
