@@ -56,7 +56,19 @@ def get_one_room(id: int):
 @app.get("/bookings")
 def get_bookings():
     with conn.cursor() as cur:
-        cur.execute("SELECT * FROM hotel_bookings ORDER BY datefrom")
+        cur.execute("""
+            SELECT 
+                hb.id AS booking_id,
+                hg.firstname || ' ' || hg.lastname AS guest_name,
+                hr.room_number AS room_number,
+                hb.datefrom,
+                hb.dateto,
+                hb.addinfo
+            FROM hotel_bookings hb
+            INNER JOIN hotel_guests hg ON hb.guest_id = hg.id
+            INNER JOIN hotel_rooms hr ON hb.room_id = hr.id
+            ORDER BY hb.datefrom
+        """)
         bookings = cur.fetchall()
         return bookings
     
