@@ -101,10 +101,7 @@ def get_guests():
     with conn.cursor() as cur:
         cur.execute("""
                     SELECT 
-                        hg.id, 
-                        hg.firstname, 
-                        hg.lastname,
-                        hg.address,
+                        *,
                         (
                             SELECT COUNT(*) 
                             FROM hotel_bookings hb 
