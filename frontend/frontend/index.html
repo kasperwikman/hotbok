@@ -10,30 +10,43 @@
 <body>
     <h2>Available Rooms</h2>
     <ul id="room-list"></ul>
-    
+
     <h2>Book A Room</h2>
     <form id="booking-form">
         <label for="guest-select">Select Guest:</label>
         <select id="guest-select"></select><br><br>
-    
+
         <label for="room-select">Select Room:</label>
         <select id="room-select"></select><br><br>
-    
+
         <label for="datefrom">From:</label>
         <input type="date" id="datefrom" required><br><br>
-    
+
         <label for="dateto">To:</label>
         <input type="date" id="dateto" required><br><br>
-    
+
         <label for="addinfo">Additional Info:</label>
         <input type="text" id="addinfo"><br><br>
-    
+
         <input type="button" value="Submit Booking" onclick="submitBooking()">
     </form>
 
     <h2>All Bookings</h2>
-    <ul id="booking-list"></ul>
-    
+    <table id="booking-list" border="1">
+        <thead>
+            <tr>
+                <th>Guest</th>
+                <th>Room</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Additional Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
     <script src="./roomsAndBooking.js"></script>
 </body>
 

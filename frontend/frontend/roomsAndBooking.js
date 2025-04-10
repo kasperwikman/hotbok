@@ -58,17 +58,28 @@ async function submitBooking() {
 
 // function to fetch bookings and display them in the list
 
-async function fetchBookings() {
-    const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/bookings');
-    const data = await response.json();
-    const bookingList = document.getElementById('booking-list');
-    bookingList.innerHTML = '';
+function fetchBookings() {
+    fetch('http://vm4430.kaj.pouta.csc.fi:8523/bookings')
+        .then(response => response.json())
+        .then(data => {
+            const bookingTableBody = document.querySelector('#booking-list tbody');
+            bookingTableBody.innerHTML = ''; // Clear existing rows
 
-    data.forEach(booking => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `Guest Name: ${booking.guest_name}, Room Number: ${booking.room_number}, From: ${booking.datefrom}, To: ${booking.dateto}, Info: ${booking.addinfo}`;
-        bookingList.appendChild(listItem);
-    });
+            data.forEach(booking => {
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${booking.guest_name}</td>
+                    <td>${booking.room_name}</td>
+                    <td>${booking.datefrom}</td>
+                    <td>${booking.dateto}</td>
+                    <td>${booking.addinfo || 'N/A'}</td>
+                `;
+
+                bookingTableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching bookings:', error));
 }
 async function fetchGuests() {
         const response = await fetch('http://vm4430.kaj.pouta.csc.fi:8523/guests');
