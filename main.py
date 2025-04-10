@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import date
+from markupsafe import escape
 
 PORT=8523
 
@@ -89,7 +90,7 @@ def create_booking(booking: Booking):
              booking.room_id, 
              booking.datefrom, 
              booking.dateto,
-             booking.addinfo],
+             escape(booking.addinfo)],
         )
         booking_id = cur.fetchone()['id']
     return {"message": "Booking created successfully", "booking_id": booking_id}
