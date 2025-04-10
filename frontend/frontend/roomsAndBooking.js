@@ -70,7 +70,7 @@ function fetchBookings() {
 
                 row.innerHTML = `
                     <td>${booking.guest_name}</td>
-                    <td>${booking.room_name}</td>
+                    <td>${booking.room_number}</td>
                     <td>${booking.datefrom}</td>
                     <td>${booking.dateto}</td>
                     <td>${booking.addinfo || 'N/A'}</td>
