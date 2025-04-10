@@ -95,6 +95,8 @@ def create_booking(booking: Booking):
         booking_id = cur.fetchone()['id']
     return {"message": "Booking created successfully", "booking_id": booking_id}
 
+@app.put("/bookings/{id}")
+
 # GUESTS
 
 @app.get("/guests")
